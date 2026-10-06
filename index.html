@@ -16,14 +16,14 @@ input{width:100%;background:#0a0f2c;border:1px solid var(--b);border-radius:12px
 .btn:active{transform:scale(.96)}.btn.g{background:#10163a;box-shadow:none}.btn:disabled{opacity:.4;box-shadow:none}
 .btn.go{background:linear-gradient(135deg,var(--pu),var(--pk));animation:pl 1.4s infinite}@keyframes pl{50%{box-shadow:0 0 26px var(--pk)}}
 .row{display:flex;gap:10px}.row>*{flex:1}
-.av{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}
-.av b{font-size:28px;text-align:center;padding:8px;border:2px solid var(--b);border-radius:14px;cursor:pointer}.av b.on{border-color:var(--cy);box-shadow:0 0 12px var(--cy);transform:scale(1.07)}
+.av{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.av b{font-size:26px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:2px solid var(--b);border-radius:14px;cursor:pointer;min-width:0;overflow:hidden}.av b.on{border-color:var(--cy);box-shadow:0 0 12px var(--cy);transform:scale(1.07)}
 .code{font-size:32px;letter-spacing:5px;color:var(--cy);text-shadow:0 0 12px var(--cy);font-weight:800;line-height:1.1}
 .pl{display:flex;align-items:center;gap:8px}.pc{text-align:center;padding:12px 6px;border-radius:16px;border:1px solid var(--wa);box-shadow:0 0 14px #ffb02033;transition:.3s}
 .pc.r{border-color:var(--gr);box-shadow:0 0 16px #2dffa055}.pc.e{border-style:dashed;border-color:var(--b);box-shadow:none;color:var(--tx2)}
 .pc .a{font-size:46px}.vs{font-size:22px;color:var(--pk);text-shadow:0 0 10px var(--pk);font-weight:800}
 .sm{color:var(--tx2);font-size:13px}.seg button{min-height:56px}.seg .on{border-color:var(--cy);box-shadow:0 0 14px var(--cy)}
-.gr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .gc{text-align:center;padding:12px 4px;border:2px solid var(--b);border-radius:14px;cursor:pointer;font-size:13px;transition:.15s}.gc i{display:block;font-style:normal;font-size:28px}
 .gc.on{border-color:var(--gr);box-shadow:0 0 16px var(--gr);transform:scale(1.05)}.gc.off{opacity:.35}
 .lock{pointer-events:none}
@@ -38,7 +38,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;b
 .rm{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}.ib{display:flex;gap:8px}
 .ib button{position:relative;width:46px;height:46px;border:1px solid var(--blue);border-radius:12px;background:#0a0f2c;font-size:20px;color:#fff}.ib button:active{transform:scale(.92)}
 #bg{display:none;position:absolute;top:-6px;right:-6px;background:var(--pk);border-radius:9px;min-width:18px;font:700 11px/18px system-ui;font-style:normal}
-.im{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--cy)}.av b .im{width:34px;height:34px;border:0}.ci{width:20px;height:20px;border-radius:50%;vertical-align:middle;margin-right:4px}
+.im{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--cy)}.av b .im{width:100%;height:100%;border:0;border-radius:0}.ci{width:20px;height:20px;border-radius:50%;vertical-align:middle;margin-right:4px}
 #chp{position:fixed;inset:0;background:#000a;display:none;z-index:8}#chp.on{display:flex}
 .ch{width:100%;max-width:560px;margin:auto auto 0;background:var(--card);border:1px solid var(--cy);border-radius:20px 20px 0 0;padding:14px;height:70dvh;display:flex;flex-direction:column}
 #cx{background:none;border:0;color:#fff;font-size:22px}
@@ -80,7 +80,15 @@ let S={me:{name:localStorage.gcn||'',av:localStorage.gca||'😎',r:0},op:null,co
 let peer,conn,M,G,ac;
 const show=id=>{document.querySelectorAll('.s').forEach(e=>e.classList.toggle('on',e.id==='s-'+id))};
 const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)};
-const beep=f=>{if(!S.snd)return;try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.12)}catch(e){}};
+const AC=window.AudioContext||window.webkitAudioContext;
+const unlock=()=>{try{ac=ac||new AC();if(ac.state!=='running')ac.resume()}catch(e){}};
+['pointerdown','touchstart','keydown'].forEach(e=>addEventListener(e,unlock,{passive:true}));
+const tone=(f,d,ty='sine',v=.3,t0=0,f2)=>{if(!S.snd||!ac)return;try{const t=ac.currentTime+t0,o=ac.createOscillator(),g=ac.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d+.03)}catch(e){}};
+const seq=(a,d,ty,v,gap)=>a.forEach((f,i)=>tone(f,d,ty,v,i*gap));
+const SFX={tap:()=>tone(700,.06,'triangle',.25,0,500),x:()=>{tone(600,.09,'square',.16);tone(900,.09,'square',.12,.07)},o:()=>{tone(420,.12,'sine',.4,0,300);tone(630,.1,'sine',.25,.06)},
+ start:()=>seq([392,523,659],.14,'triangle',.3,.09),ready:()=>seq([520,780],.1,'triangle',.3,.08),join:()=>seq([440,587,740],.12,'sine',.35,.1),msg:()=>tone(880,.1,'sine',.25,0,1100),
+ win:()=>seq([523,659,784,1047,1319],.2,'triangle',.35,.11),lose:()=>seq([392,330,262,196],.22,'sawtooth',.18,.14),draw:()=>seq([440,440],.15,'triangle',.3,.16)};
+document.addEventListener('click',e=>{if(e.target.closest('button,.gc,.av b')&&!e.target.closest('.ce'))SFX.tap()});
 for(let i=0;i<10;i++){const p=document.createElement('i');p.className='pt';p.style.left=Math.random()*100+'%';p.style.animationDelay=-Math.random()*12+'s';document.body.append(p)}
 // ---- entry
 $('#nm').value=S.me.name;
@@ -107,10 +115,10 @@ function wire(){const o=()=>{S.op={name:'...',av:'👤',r:0};hi();if(!S.host)sho
 const hi=()=>send({t:'hi',name:S.me.name,av:S.me.av}),cfgSend=()=>send({t:'cfg',mode:S.mode,game:S.game});
 function gone(){conn=null;S.op=null;S.me.r=0;if(S.host){toast('Raqib chiqib ketdi');show('lobby');render()}else{toast('Raqib chiqib ketdi');show('entry')}}
 function on(m){switch(m.t){
- case'hi':S.op={name:String(m.name).slice(0,16),av:okAv(m.av),r:S.op?S.op.r:0};if(S.host)cfgSend();render();break;
+ case'hi':if(S.op&&S.op.name==='...')SFX.join();S.op={name:String(m.name).slice(0,16),av:okAv(m.av),r:S.op?S.op.r:0};if(S.host)cfgSend();render();break;
  case'ready':S.op.r=m.v;render();break;
  case'cfg':S.mode=m.mode;S.game=m.game;render();break;
- case'chat':addChat(S.op,m.x);break;
+ case'chat':addChat(S.op,m.x);SFX.msg();break;
  case'next':play(m);break;
  case'move':place(m.i,G.me==='X'?'O':'X');break;
  case'rate':M.rg=m.v;tryNext();break;
@@ -130,7 +138,7 @@ function render(){$('#rc').textContent=S.code;$('#snd').textContent=S.snd?'🔊'
  const why=!o?'Raqib kutilmoqda':!S.me.r?'Siz tayyor emassiz':!o.r?'Raqib tayyor emas':'';
  $('#st').style.display=S.host?'':'none';$('#st').disabled=!!why;$('#why').textContent=S.host?why:(S.me.r&&!o?.r?'Raqib tayyor emas':'Host boshlaydi')}
 $('#mf').onclick=()=>{S.mode='free';cfgSend();render()};$('#mp').onclick=()=>{S.mode='party';cfgSend();render()};
-$('#rd').onclick=()=>{S.me.r=S.me.r?0:1;send({t:'ready',v:S.me.r});render()};
+$('#rd').onclick=()=>{S.me.r=S.me.r?0:1;if(S.me.r)SFX.ready();send({t:'ready',v:S.me.r});render()};
 $('#snd').onclick=()=>{S.snd=!S.snd;localStorage.gcs=S.snd?1:0;render()};
 const link=()=>location.origin+location.pathname+'?room='+S.code;
 const copy=t=>(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(()=>{const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();document.execCommand('copy');x.remove()});
@@ -160,13 +168,13 @@ function play(m){G={g:m.g,b:Array(9).fill(''),turn:'X',over:0,me:(m.n+(S.host?0:
  const[h,g]=m.sc;$('#sc').textContent=`${(S.host?S.me:S.op).name} ${h} : ${g} ${(S.host?S.op:S.me).name}`;
  $('#bd').innerHTML=Array.from({length:9},(_,i)=>`<button class="ce" data-i="${i}"></button>`).join('');
  $('#bd').querySelectorAll('.ce').forEach(c=>c.onclick=()=>{const i=+c.dataset.i;if(G.over||G.turn!==G.me||G.b[i])return;place(i,G.me);send({t:'move',i})});
- status();show('game')}
+ status();show('game');SFX.start()}
 const status=()=>$('#gs').textContent=G.over?'':G.turn===G.me?`Sizning navbatingiz (${G.me})`:'Raqib navbati...';
 const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-function place(i,k){G.b[i]=k;const c=$('#bd').children[i];c.textContent=k;c.className='ce '+k;G.turn=k==='X'?'O':'X';beep(k==='X'?520:380);
+function place(i,k){G.b[i]=k;const c=$('#bd').children[i];c.textContent=k;c.className='ce '+k;G.turn=k==='X'?'O':'X';SFX[k==='X'?'x':'o']();navigator.vibrate&&navigator.vibrate(15);
  const w=L.find(l=>l.every(x=>G.b[x]===k));if(w){w.forEach(x=>$('#bd').children[x].classList.add('w'));fin(k)}else if(G.b.every(x=>x))fin(null);else status()}
 function fin(w){G.over=1;const hm=S.host?G.me:G.me==='X'?'O':'X';G.hp=w===null?.5:w===hm?1:0;G.gp=1-G.hp;
- const mine=S.host?G.hp:G.gp;$('#gs').textContent=mine===1?'🎉 Siz yutdingiz!':mine===0?'😔 Yutqazdingiz':'🤝 Durang';beep(mine===1?880:300);
+ const mine=S.host?G.hp:G.gp;$('#gs').textContent=mine===1?'🎉 Siz yutdingiz!':mine===0?'😔 Yutqazdingiz':'🤝 Durang';SFX[mine===1?'win':mine===0?'lose':'draw']();
  setTimeout(()=>{$('#rr').textContent=$('#gs').textContent;$('#rw').textContent='';$('#up').disabled=$('#dn').disabled=false;show('rate')},1100)}
 const rate=v=>{$('#up').disabled=$('#dn').disabled=true;$('#rw').textContent='Raqib baholashini kutamiz...';if(S.host){M.rh=v;tryNext()}else send({t:'rate',v})};
 $('#up').onclick=()=>rate(1);$('#dn').onclick=()=>rate(-1);
