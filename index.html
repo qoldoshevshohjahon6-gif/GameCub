@@ -3,6 +3,7 @@
 <title>GameCub</title><meta name="theme-color" content="#070a1c">
 <meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>window.Peer||document.write('<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"><\/script>')</script>
 <style>
@@ -51,7 +52,7 @@ input{width:100%;background:#0a0f2c;border:1px solid var(--b);border-radius:12px
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;border-bottom:1px solid var(--b);text-align:center}td svg{vertical-align:-3px}
 .gn{color:var(--gr)}.rd{color:#ff6b81}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1b2260;border:1px solid var(--cy);border-radius:12px;padding:10px 16px;opacity:0;transition:.3s;pointer-events:none;z-index:12;text-align:center;width:max-content;max-width:90vw}#toast.on{opacity:1}
-#ld{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:11;padding:20px}#ld.on{display:flex}
+#ld,#qm{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:11;padding:20px}#ld.on,#qm.on{display:flex}
 .spn{width:34px;height:34px;border:4px solid var(--b);border-top-color:var(--cy);border-radius:50%;margin:6px auto 12px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 .bd.c4{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;max-width:380px;background:#14206b;padding:6px;border-radius:14px}
 .cc{aspect-ratio:1;border-radius:50%;border:2px solid #0a0f2c;background:#0a0f2c;padding:0}.cc.X{background:var(--cy);box-shadow:0 0 10px var(--cy)}.cc.O{background:var(--pk);box-shadow:0 0 10px var(--pk)}.cc.w{outline:3px solid var(--gr)}
@@ -65,7 +66,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;b
 <button class="btn" id="bgo" style="display:none">Qo'shilish</button></div></div>
 <div class="s" id="s-lobby"><div class="top"><h1><i data-i="gamepad" data-s="30"></i>GameCub</h1><div class="ib hbs"><button id="fs"></button><button id="snd"></button></div></div>
 <div class="c rm"><div><div class="sm">Xona kodi</div><div class="code" id="rc"></div></div>
-<div class="ib"><button id="cp" aria-label="Nusxalash"><i data-i="copy"></i></button><button id="sh" aria-label="Ulashish"><i data-i="share"></i></button><button id="cb" aria-label="Chat"><i data-i="chat"></i><i id="bg"></i></button></div></div>
+<div class="ib"><button id="cp" aria-label="Nusxalash"><i data-i="copy"></i></button><button id="sh" aria-label="Ulashish"><i data-i="share"></i></button><button id="qr" aria-label="QR kod"><i data-i="qr"></i></button><button id="cb" aria-label="Chat"><i data-i="chat"></i><i id="bg"></i></button></div></div>
 <div class="c"><div class="pl"><div class="pc" id="p1" style="flex:1"></div><div class="vs">VS</div><div class="pc" id="p2" style="flex:1"></div></div></div>
 <div class="c" id="cfg"><div class="row seg"><button class="btn g" id="mf"><i data-i="gamepad" data-s="18"></i>Erkin rejim</button><button class="btn g" id="mp"><i data-i="dice" data-s="18"></i>Tasodifiy partiya<br><span class="sm">10 o'yin</span></button></div>
 <div id="gw"><div class="sm" style="margin-bottom:8px">Qaysi o'yinni o'ynaymiz?</div><div class="gr" id="gg"></div></div>
@@ -77,12 +78,14 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;b
 <div class="row" style="margin-top:12px"><button class="btn g" id="up"><i data-i="up" data-s="34"></i></button><button class="btn g" id="dn"><i data-i="down" data-s="34"></i></button></div><div class="sm" id="rw"></div></div></div>
 <div class="s" id="s-dash"><h1><i data-i="trophy" data-s="30"></i>Natija</h1><div class="c tc"><div class="big" id="dw"></div><table id="dt"></table></div><button class="btn" id="bl">Lobbiga qaytish</button></div>
 <div id="toast"></div>
-<div id="ld"><div class="c tc" style="width:100%;max-width:340px"><div class="spn"></div>Xonaga ulanmoqda...<div class="sm" style="margin:6px 0 12px">Bu 20 soniyagacha davom etishi mumkin</div><button class="btn g" id="lc">Bekor qilish</button></div></div>
+<div id="qm"><div class="c tc" style="width:100%;max-width:320px"><div class="sm">Do'stingiz telefon kamerasini QR'ga qaratsin</div><div id="qc" style="background:#fff;padding:12px;border-radius:12px;display:inline-block;margin:12px 0"></div><div class="code" id="qk" style="text-align:center;margin-bottom:12px"></div><button class="btn g" id="qx">Yopish</button></div></div>
+<div id="ld"><div class="c tc" style="width:100%;max-width:340px"><div class="spn"></div>Xonaga ulanmoqda...<div class="sm" id="lt" style="margin:6px 0 12px"></div><button class="btn g" id="lc">Bekor qilish</button></div></div>
 <div id="chp"><div class="ch"><div class="row" style="align-items:center"><b style="flex:1">Chat</b><button id="cx"><i data-i="x"></i></button></div><div id="chl"></div>
 <div class="row em" id="em"></div><div class="row" style="margin-top:8px"><input id="ci" maxlength="200" placeholder="Xabar yozing..." style="margin:0;flex:4"><button class="btn" id="cs" style="margin:0;flex:1"><i data-i="send"></i></button></div></div></div>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
 const I={
+qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v1M14 20h1M17 20h4v1"/>',
 gamepad:'<line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258A4 4 0 0 0 17.32 5z"/>',
 vol:'<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/>',
 mute:'<path d="M11 5 6 9H2v6h4l5 4z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/>',
@@ -124,9 +127,9 @@ const okAv=a=>{a=String(a);return PH.test(a)&&a.length<40000?a:/^a[0-8]$/.test(a
 const avh=(a,c='')=>{if(isP(a))return`<img class="im ${c}" src="${a}">`;const x=AVS[+a.slice(1)]||AVS[0];return`<span class="ava ${c}" style="background:linear-gradient(135deg,${x[1]},${x[2]})">${ic(x[0],'55%')}</span>`};
 const GAMES={xo:{n:'XO',i:'xo'},c4:{n:'Connect 4',i:'c4'},pong:{n:'Pong',i:'pong',nd:1}},SOON=[['ship','Dengiz jangi'],['dama','Shashka'],['tank','Tank jangi']];
 let S={me:{name:localStorage.gcn||'',av:okAv(localStorage.gca||'a0'),r:0},op:null,code:'',host:0,mode:'free',game:'xo',snd:localStorage.gcs!=='0'};
-let peer,conn,M,G,ac,wl,tm;
+let peer,conn,M,G,ac,wl,tm,stg=0;
 const show=id=>{document.querySelectorAll('.s').forEach(e=>e.classList.toggle('on',e.id==='s-'+id))};
-const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2800)};
+const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),Math.min(6500,1500+t.length*55))};
 // ---- sound
 const AC=window.AudioContext||window.webkitAudioContext;
 const unlock=()=>{try{ac=ac||new AC();if(ac.state!=='running')ac.resume()}catch(e){}};
@@ -156,9 +159,7 @@ const noPeer=()=>typeof Peer==='undefined'&&(toast('PeerJS yuklanmadi. Internetn
 $('#bc').onclick=()=>{if(noPeer())return;if(prof()){goFS();create()}};
 $('#bgo').onclick=()=>{if(noPeer())return;const c=$('#cd').value.trim().toUpperCase();if(prof()){if(c.length!==4)return toast('Kod 4 belgidan iborat');goFS();join(c)}};
 // ---- network
-const ICE={config:{iceServers:[{urls:['stun:stun.l.google.com:19302','stun:stun1.l.google.com:19302','stun:stun.cloudflare.com:3478']},
- {urls:['turn:eu-0.turn.peerjs.com:3478','turn:us-0.turn.peerjs.com:3478'],username:'peerjs',credential:'peerjsp'},
- {urls:['turn:openrelay.metered.ca:80','turn:openrelay.metered.ca:443','turns:openrelay.metered.ca:443?transport=tcp'],username:'openrelayproject',credential:'openrelayproject'}]}};
+const ICE={};
 const send=m=>conn&&conn.open&&conn.send(m);
 const keep=()=>peer.on('disconnected',()=>{try{peer.reconnect()}catch(e){}});
 function create(){S.host=1;const L='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';S.code=Array.from({length:4},()=>L[Math.random()*L.length|0]).join('');
@@ -167,9 +168,9 @@ function create(){S.host=1;const L='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';S.code=Arr
  peer.on('error',e=>e.type==='unavailable-id'?create():toast('Ulanish xatosi: '+e.type))}
 const stopLd=()=>{clearTimeout(tm);$('#ld').classList.remove('on')};
 const fail=m=>{stopLd();try{conn&&conn.close()}catch(e){}try{peer&&peer.destroy()}catch(e){}conn=null;peer=null;toast(m||"Ulanib bo'lmadi. Tarmoq to'sib qo'ygan bo'lishi mumkin, qayta urinib ko'ring");show('entry')};
-function join(c){S.host=0;S.code=c;$('#ld').classList.add('on');tm=setTimeout(()=>fail(),20000);
+function join(c){S.host=0;S.code=c;stg=1;$('#lt').textContent="1/2 · Server bilan bog'lanmoqda...";$('#ld').classList.add('on');tm=setTimeout(()=>fail(stg<2?"Server bilan bog'lanib bo'lmadi. Internetni tekshiring yoki Wi-Fi/mobil tarmoqni almashtirib ko'ring":"Raqib bilan ulanib bo'lmadi. Tarmoq to'g'ridan-to'g'ri ulanishni to'sgan, boshqa tarmoqda urinib ko'ring"),25000);
  peer=new Peer(ICE);keep();
- peer.on('open',()=>{conn=peer.connect('gamecub-'+c,{reliable:true});const pc=conn.peerConnection;if(pc)pc.oniceconnectionstatechange=()=>{if(pc.iceConnectionState==='failed')fail()};wire()});
+ peer.on('open',()=>{stg=2;$('#lt').textContent='2/2 · Raqib bilan ulanmoqda...';conn=peer.connect('gamecub-'+c,{reliable:true});const pc=conn.peerConnection;if(pc)pc.oniceconnectionstatechange=()=>{if(pc.iceConnectionState==='failed')fail()};wire()});
  peer.on('error',e=>fail(e.type==='peer-unavailable'?'Xona topilmadi. Kodni tekshiring':null))}
 $('#lc').onclick=()=>fail('Bekor qilindi');
 function wire(){const o=()=>{stopLd();S.op={name:'...',av:'a0',r:0};hi();if(!S.host)show('lobby');else cfgSend();render()};conn.open?o():conn.on('open',o);conn.on('data',on);conn.on('close',gone)}
@@ -206,6 +207,8 @@ $('#rd').onclick=()=>{S.me.r=S.me.r?0:1;if(S.me.r)SFX.ready();send({t:'ready',v:
 $('#snd').onclick=()=>{S.snd=!S.snd;localStorage.gcs=S.snd?1:0;render()};
 const link=()=>location.origin+location.pathname+'?room='+S.code;
 const copy=t=>(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(()=>{const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();document.execCommand('copy');x.remove()});
+$('#qr').onclick=()=>{if(typeof QRCode==='undefined')return toast('QR kutubxonasi yuklanmadi');$('#qc').innerHTML='';new QRCode($('#qc'),{text:link(),width:200,height:200,correctLevel:QRCode.CorrectLevel.M});$('#qk').textContent=S.code;$('#qm').classList.add('on')};
+$('#qx').onclick=$('#qm').onclick=e=>{if(e.target.id==='qm'||e.target.id==='qx')$('#qm').classList.remove('on')};
 $('#cp').onclick=()=>copy(S.code).then(()=>toast('Nusxalandi'));
 $('#sh').onclick=()=>navigator.share?navigator.share({title:'GameCub',text:"GameCub: o'ynaymizmi? Kod: "+S.code,url:link()}).catch(()=>{}):copy(link()).then(()=>toast('Havola nusxalandi'));
 // chat
