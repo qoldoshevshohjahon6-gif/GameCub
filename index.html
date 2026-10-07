@@ -4,6 +4,7 @@
 <meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>window.Peer||document.write('<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"><\/script>')</script>
 <style>
@@ -31,7 +32,7 @@ input{width:100%;background:#0a0f2c;border:1px solid var(--b);border-radius:12px
 .code{font-size:32px;letter-spacing:5px;color:var(--cy);text-shadow:0 0 12px var(--cy);font-weight:800;line-height:1.1}
 .rm{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}.ib{display:flex;gap:8px}
 .ib button{position:relative;width:44px;height:44px;border:1px solid var(--blue);border-radius:12px;background:#0a0f2c;color:#fff;display:flex;align-items:center;justify-content:center}.ib button:active{transform:scale(.92)}
-.top{position:relative}.hbs{position:absolute;right:0;top:4px}.hbs button{width:38px;height:38px}
+.top{display:flex;align-items:center;gap:8px}.top h1{flex:1;font-size:22px;margin:8px 0;gap:6px;letter-spacing:1px}.top .ib button{width:38px;height:38px}.rm .code{font-size:26px;letter-spacing:3px}.rm .ib{gap:6px}.rm .ib button{width:40px;height:40px}
 #bg{display:none;position:absolute;top:-6px;right:-6px;background:var(--pk);border-radius:9px;min-width:18px;font:700 11px/18px system-ui;font-style:normal}
 .pl{display:flex;align-items:center;gap:8px}.pc{text-align:center;padding:12px 6px;border-radius:16px;border:1px solid var(--wa);box-shadow:0 0 14px #ffb02033;transition:.3s}
 .pc.r{border-color:var(--gr);box-shadow:0 0 16px #2dffa055}.pc.e{border-style:dashed;border-color:var(--b);box-shadow:none;color:var(--tx2)}
@@ -52,7 +53,7 @@ input{width:100%;background:#0a0f2c;border:1px solid var(--b);border-radius:12px
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;border-bottom:1px solid var(--b);text-align:center}td svg{vertical-align:-3px}
 .gn{color:var(--gr)}.rd{color:#ff6b81}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1b2260;border:1px solid var(--cy);border-radius:12px;padding:10px 16px;opacity:0;transition:.3s;pointer-events:none;z-index:12;text-align:center;width:max-content;max-width:90vw}#toast.on{opacity:1}
-#ld,#qm{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:11;padding:20px}#ld.on,#qm.on{display:flex}
+#ld,#qm,#scn{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:11;padding:20px}#ld.on,#qm.on,#scn.on{display:flex}
 .spn{width:34px;height:34px;border:4px solid var(--b);border-top-color:var(--cy);border-radius:50%;margin:6px auto 12px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 .bd.c4{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;max-width:380px;background:#14206b;padding:6px;border-radius:14px}
 .cc{aspect-ratio:1;border-radius:50%;border:2px solid #0a0f2c;background:#0a0f2c;padding:0}.cc.X{background:var(--cy);box-shadow:0 0 10px var(--cy)}.cc.O{background:var(--pk);box-shadow:0 0 10px var(--pk)}.cc.w{outline:3px solid var(--gr)}
@@ -62,9 +63,10 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;b
 <input id="nm" maxlength="16" placeholder="Ismingiz"><div class="av" id="avs"></div>
 <button class="btn" id="bc">Xona yaratish</button>
 <button class="btn g" id="bj">Kod bilan qo'shilish</button>
+<button class="btn g" id="bq"><i data-i="qr" data-s="18"></i>QR skanerlash</button>
 <input id="cd" maxlength="4" placeholder="Xona kodi (masalan 7K4P)" style="display:none;text-transform:uppercase;text-align:center;letter-spacing:6px">
 <button class="btn" id="bgo" style="display:none">Qo'shilish</button></div></div>
-<div class="s" id="s-lobby"><div class="top"><h1><i data-i="gamepad" data-s="30"></i>GameCub</h1><div class="ib hbs"><button id="fs"></button><button id="snd"></button></div></div>
+<div class="s" id="s-lobby"><div class="top"><div class="ib"><button id="bk" aria-label="Orqaga"><i data-i="back"></i></button></div><h1><i data-i="gamepad" data-s="24"></i>GameCub</h1><div class="ib"><button id="fs"></button><button id="snd"></button></div></div>
 <div class="c rm"><div><div class="sm">Xona kodi</div><div class="code" id="rc"></div></div>
 <div class="ib"><button id="cp" aria-label="Nusxalash"><i data-i="copy"></i></button><button id="sh" aria-label="Ulashish"><i data-i="share"></i></button><button id="qr" aria-label="QR kod"><i data-i="qr"></i></button><button id="cb" aria-label="Chat"><i data-i="chat"></i><i id="bg"></i></button></div></div>
 <div class="c"><div class="pl"><div class="pc" id="p1" style="flex:1"></div><div class="vs">VS</div><div class="pc" id="p2" style="flex:1"></div></div></div>
@@ -78,6 +80,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;b
 <div class="row" style="margin-top:12px"><button class="btn g" id="up"><i data-i="up" data-s="34"></i></button><button class="btn g" id="dn"><i data-i="down" data-s="34"></i></button></div><div class="sm" id="rw"></div></div></div>
 <div class="s" id="s-dash"><h1><i data-i="trophy" data-s="30"></i>Natija</h1><div class="c tc"><div class="big" id="dw"></div><table id="dt"></table></div><button class="btn" id="bl">Lobbiga qaytish</button></div>
 <div id="toast"></div>
+<div id="scn"><div class="c tc" style="width:100%;max-width:340px"><div class="sm" style="margin-bottom:8px">QR kodni kameraga qarating</div><video id="vd" playsinline muted style="width:100%;border-radius:12px;background:#000"></video><button class="btn g" id="sx" style="margin-top:10px">Yopish</button></div></div>
 <div id="qm"><div class="c tc" style="width:100%;max-width:320px"><div class="sm">Do'stingiz telefon kamerasini QR'ga qaratsin</div><div id="qc" style="background:#fff;padding:12px;border-radius:12px;display:inline-block;margin:12px 0"></div><div class="code" id="qk" style="text-align:center;margin-bottom:12px"></div><button class="btn g" id="qx">Yopish</button></div></div>
 <div id="ld"><div class="c tc" style="width:100%;max-width:340px"><div class="spn"></div>Xonaga ulanmoqda...<div class="sm" id="lt" style="margin:6px 0 12px"></div><button class="btn g" id="lc">Bekor qilish</button></div></div>
 <div id="chp"><div class="ch"><div class="row" style="align-items:center"><b style="flex:1">Chat</b><button id="cx"><i data-i="x"></i></button></div><div id="chl"></div>
@@ -86,6 +89,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;b
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
 const I={
 qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v1M14 20h1M17 20h4v1"/>',
+back:'<path d="m15 18-6-6 6-6"/>',
 gamepad:'<line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258A4 4 0 0 0 17.32 5z"/>',
 vol:'<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/>',
 mute:'<path d="M11 5 6 9H2v6h4l5 4z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/>',
@@ -146,6 +150,18 @@ const lock=async()=>{try{wl=await navigator.wakeLock.request('screen')}catch(e){
 const goFS=()=>{unlock();lock();const d=document.documentElement,f=d.requestFullscreen||d.webkitRequestFullscreen;if(f)try{const p=f.call(d,{navigationUI:'hide'});p&&p.catch&&p.catch(()=>{})}catch(e){}};
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(conn)lock();if(peer&&peer.disconnected&&!peer.destroyed)try{peer.reconnect()}catch(e){}}});
 addEventListener('beforeunload',e=>{if(conn&&conn.open){e.preventDefault();e.returnValue=''}});
+$('#bk').onclick=()=>{if(conn&&conn.open&&!confirm('Xonadan chiqasizmi?'))return;const c=conn;conn=null;S.op=null;S.me.r=0;try{c&&c.close()}catch(e){}try{peer&&peer.destroy()}catch(e){}peer=null;show('entry')};
+let stream,scanT;const stopScan=()=>{clearInterval(scanT);if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;$('#scn').classList.remove('on')};
+$('#bq').onclick=async()=>{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return toast('Kamera bu brauzerda mavjud emas');
+ try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}})}catch(e){return toast('Kameraga ruxsat berilmadi')}
+ const v=$('#vd');v.srcObject=stream;try{await v.play()}catch(e){}$('#scn').classList.add('on');
+ const bd=window.BarcodeDetector?new BarcodeDetector({formats:['qr_code']}):null,cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});
+ scanT=setInterval(async()=>{if(!v.videoWidth)return;let txt='';
+  try{if(bd){const r=await bd.detect(v);txt=r[0]?r[0].rawValue:''}else if(window.jsQR){cv.width=v.videoWidth;cv.height=v.videoHeight;cx.drawImage(v,0,0);const d=cx.getImageData(0,0,cv.width,cv.height),q=jsQR(d.data,d.width,d.height);txt=q?q.data:''}}catch(e){}
+  if(!txt)return;let c='';try{c=new URL(txt).searchParams.get('room')||''}catch(e){}if(!c&&/^[A-Za-z0-9]{4}$/.test(txt))c=txt;if(!c)return;
+  stopScan();$('#cd').value=c.toUpperCase().slice(0,4);$('#cd').style.display=$('#bgo').style.display='block';
+  if($('#nm').value.trim()){toast('Kod topildi: '+c.toUpperCase());$('#bgo').click()}else{toast('Kod topildi. Ismingizni kiriting va Qo\'shilish bosing');$('#nm').focus()}},250)};
+$('#sx').onclick=stopScan;
 $('#fs').onclick=()=>document.fullscreenElement?document.exitFullscreen():goFS();
 // ---- entry
 $('#nm').value=S.me.name;
@@ -175,7 +191,7 @@ function join(c){S.host=0;S.code=c;stg=1;$('#lt').textContent="1/2 · Server bil
 $('#lc').onclick=()=>fail('Bekor qilindi');
 function wire(){const o=()=>{stopLd();S.op={name:'...',av:'a0',r:0};hi();if(!S.host)show('lobby');else cfgSend();render()};conn.open?o():conn.on('open',o);conn.on('data',on);conn.on('close',gone)}
 const hi=()=>send({t:'hi',name:S.me.name,av:S.me.av}),cfgSend=()=>send({t:'cfg',mode:S.mode,game:S.game});
-function gone(){conn=null;S.op=null;S.me.r=0;toast('Raqib chiqib ketdi');if(S.host){show('lobby');render()}else show('entry')}
+function gone(){if(!conn)return;conn=null;S.op=null;S.me.r=0;toast('Raqib chiqib ketdi');if(S.host){show('lobby');render()}else show('entry')}
 function on(m){switch(m.t){
  case'hi':if(S.op&&S.op.name==='...')SFX.join();S.op={name:String(m.name).slice(0,16),av:okAv(m.av),r:S.op?S.op.r:0};if(S.host)cfgSend();render();break;
  case'ready':S.op.r=m.v;render();break;
