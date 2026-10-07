@@ -175,19 +175,17 @@ const noPeer=()=>typeof Peer==='undefined'&&(toast('PeerJS yuklanmadi. Internetn
 $('#bc').onclick=()=>{if(noPeer())return;if(prof()){goFS();create()}};
 $('#bgo').onclick=()=>{if(noPeer())return;const c=$('#cd').value.trim().toUpperCase();if(prof()){if(c.length!==4)return toast('Kod 4 belgidan iborat');goFS();join(c)}};
 // ---- network
-const ICE={};
 const send=m=>conn&&conn.open&&conn.send(m);
-const keep=()=>peer.on('disconnected',()=>{try{peer.reconnect()}catch(e){}});
 function create(){S.host=1;const L='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';S.code=Array.from({length:4},()=>L[Math.random()*L.length|0]).join('');
- peer=new Peer('gamecub-'+S.code,ICE);keep();peer.on('open',()=>{show('lobby');render()});
+ peer=new Peer('gamecub-'+S.code);peer.on('open',()=>{show('lobby');render()});
  peer.on('connection',c=>{if(conn&&conn.open){c.close();return}conn=c;wire()});
  peer.on('error',e=>e.type==='unavailable-id'?create():toast('Ulanish xatosi: '+e.type))}
 const stopLd=()=>{clearTimeout(tm);$('#ld').classList.remove('on')};
 const fail=m=>{stopLd();try{conn&&conn.close()}catch(e){}try{peer&&peer.destroy()}catch(e){}conn=null;peer=null;toast(m||"Ulanib bo'lmadi. Tarmoq to'sib qo'ygan bo'lishi mumkin, qayta urinib ko'ring");show('entry')};
-function join(c){S.host=0;S.code=c;stg=1;$('#lt').textContent="1/2 · Server bilan bog'lanmoqda...";$('#ld').classList.add('on');tm=setTimeout(()=>fail(stg<2?"Server bilan bog'lanib bo'lmadi. Internetni tekshiring yoki Wi-Fi/mobil tarmoqni almashtirib ko'ring":"Raqib bilan ulanib bo'lmadi. Tarmoq to'g'ridan-to'g'ri ulanishni to'sgan, boshqa tarmoqda urinib ko'ring"),25000);
- peer=new Peer(ICE);keep();
- peer.on('open',()=>{stg=2;$('#lt').textContent='2/2 · Raqib bilan ulanmoqda...';conn=peer.connect('gamecub-'+c,{reliable:true});const pc=conn.peerConnection;if(pc)pc.oniceconnectionstatechange=()=>{if(pc.iceConnectionState==='failed')fail()};wire()});
- peer.on('error',e=>fail(e.type==='peer-unavailable'?'Xona topilmadi. Kodni tekshiring':null))}
+function join(c){S.host=0;S.code=c;stg=1;$('#lt').textContent="1/2 · Server bilan bog'lanmoqda...";$('#ld').classList.add('on');tm=setTimeout(()=>{$('#lt').textContent=stg<2?"Server sekin javob bermoqda. Kuting yoki bekor qiling":"Raqib bilan ulanish cho'zilmoqda. Kuting yoki bekor qiling"},20000);
+ peer=new Peer();
+ peer.on('open',()=>{stg=2;$('#lt').textContent='2/2 · Raqib bilan ulanmoqda...';conn=peer.connect('gamecub-'+c,{reliable:true});wire()});
+ peer.on('error',e=>{if(e.type==='peer-unavailable')fail('Xona topilmadi. Kodni tekshiring');else toast('Ulanish xatosi: '+e.type)})}
 $('#lc').onclick=()=>fail('Bekor qilindi');
 function wire(){const o=()=>{stopLd();S.op={name:'...',av:'a0',r:0};hi();if(!S.host)show('lobby');else cfgSend();render()};conn.open?o():conn.on('open',o);conn.on('data',on);conn.on('close',gone)}
 const hi=()=>send({t:'hi',name:S.me.name,av:S.me.av}),cfgSend=()=>send({t:'cfg',mode:S.mode,game:S.game});
