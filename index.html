@@ -65,11 +65,22 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;b
 .gb button{aspect-ratio:1;border:1px solid #1d2a70;border-radius:6px;background:#0a1a4a;padding:0;position:relative}.gb button.s{background:#3d7bff}.gb button.h{background:#ff3d57;box-shadow:0 0 8px #ff3d57}.gb button.m::after{content:'';position:absolute;inset:36%;border-radius:50%;background:var(--tx2)}
 .bd.rp,.bd.pr{display:block;max-width:360px;margin:10px auto}.btn.sel{border-color:var(--cy);box-shadow:0 0 14px var(--cy)}.rp .btn{margin:0}
 .np{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:0 auto}.np .btn{margin:0;font-size:22px;padding:10px}.pr .row{align-items:flex-start;margin-bottom:8px;min-height:60px}.pr .sm{margin:2px 0}
-.nav{background:linear-gradient(#0b2c40,#05131d)!important;color:#e8f4fb}.nav .pt{display:none}.nav .c{background:#0e2c40;border-color:#1c5a78;box-shadow:none}
+.nav{background:radial-gradient(ellipse at 50% -5%,#4cc3ee66,transparent 55%),linear-gradient(#0d5d86,#0a3f5e 45%,#05202f)!important;color:#e8f4fb}.nav .pt{display:none}.nav .s{z-index:1}
+.nav::before,.nav::after{content:'';position:fixed;inset:-10% -60%;pointer-events:none;z-index:0;animation:wv2 26s linear infinite}
+.nav::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='48'%3E%3Cpath d='M0 24Q40 4 80 24T160 24' fill='none' stroke='white' stroke-opacity='.09' stroke-width='2'/%3E%3C/svg%3E")}
+.nav::after{animation-duration:44s;animation-direction:reverse;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='72'%3E%3Cpath d='M0 36Q60 6 120 36T240 36' fill='none' stroke='white' stroke-opacity='.06' stroke-width='3'/%3E%3C/svg%3E")}
+@keyframes wv2{to{transform:translateX(240px)}}
+.gh2{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:10px}.pl2{display:flex;align-items:center;gap:6px;min-width:0;flex:1}.pl2.r{flex-direction:row-reverse;text-align:right}
+.pl2 .ava,.pl2 .im{width:40px;height:40px;flex:none}.pl2 .nm{font-size:12px;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:72px}.nm.me{color:#7fe3ff}.nm.op{color:#ffb86b}.pl2 .sc{font-size:15px;font-weight:800}
+.gm{text-align:center;flex:none}.gt{font-size:15px;font-weight:800}.ti{display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:2px 8px;border-radius:10px;border:1px solid;margin-top:3px}.ti.me{color:#7fe3ff;border-color:#7fe3ff66;background:#7fe3ff18}.ti.op{color:#ffb86b;border-color:#ffb86b66;background:#ffb86b18}
+.shl{position:absolute;inset:0;pointer-events:none;z-index:1}.sw{position:absolute}.sw svg{width:100%;height:100%;display:block;filter:drop-shadow(1px 2px 1.5px #00121f99)}.sw.dd svg{filter:grayscale(1) brightness(.5)}
+.hd2{display:flex;gap:10px;align-items:flex-start}.mini2{width:46%;flex:none}.fn{flex:1;display:flex;flex-direction:column;gap:3px;font-size:12px}.fn b{font-size:11px;color:#8fb4c9}
+.fi{padding:3px 8px;border-radius:7px;background:#0b2a3d99;border:1px solid #1c5a78;color:#dcecf5;font:600 12px system-ui}.fi.dn{opacity:.55;text-decoration:line-through;border-color:#d9442f77}.fn2{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0;align-items:center}
+.bn2{min-height:22px;text-align:center;font-size:14px;font-weight:700;margin:6px 0}.bn2 .ok{color:#7dffb0}.bn2 .bad{color:#ff8a80}.bn2 .ne{color:#cfe7f5}.nav .c{background:#0e2c40;border-color:#1c5a78;box-shadow:none}
 .nav .btn{background:linear-gradient(#2f7396,#1b4a63);border-color:#4f9bbf;box-shadow:none}.nav .btn.g{background:#0e2c40}.nav .sm{color:#8fb4c9}
-.bd.sh2{display:block;max-width:380px;margin:8px auto}.sea{position:relative;overflow:hidden;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border-radius:12px;border:3px solid #0b3a52;background:linear-gradient(160deg,#2183a3,#0d4767);box-shadow:inset 0 0 30px #00243a}
+.bd.sh2{display:block;max-width:380px;margin:8px auto}.sea{position:relative;overflow:hidden;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border-radius:12px;border:3px solid #0b3a52;background:radial-gradient(circle at 30% 20%,#8fe3ff40,transparent 45%),linear-gradient(160deg,#2a95b8,#0e5078);box-shadow:inset 0 0 30px #00243a}
 .sea::before{content:'';position:absolute;inset:-20% -50%;background:repeating-linear-gradient(100deg,transparent 0 22px,#ffffff12 22px 24px);animation:wv 14s linear infinite;pointer-events:none}@keyframes wv{to{transform:translateX(48px)}}
-.zc{aspect-ratio:1;position:relative;padding:0;border:0;background:transparent;box-shadow:inset 0 0 0 .5px #ffffff2a}
+.zc{aspect-ratio:1;position:relative;z-index:2;padding:0;border:0;background:transparent;box-shadow:inset 0 0 0 .5px #ffffff2a}
 .zs{background:linear-gradient(180deg,#c3cdd7,#7d8b99 55%,#5d6a77)}.zs::before{content:'';position:absolute;inset:30%;background:#4a5663;border-radius:3px}
 .zh.zb{border-radius:55% 0 0 55%}.zh.ze{border-radius:0 20% 20% 0}.zv.zb{border-radius:55% 55% 0 0}.zv.ze{border-radius:0 0 20% 20%}
 .zk{background:linear-gradient(#4b4f55,#23262a)}.zk::before{background:#14161a}
@@ -99,7 +110,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;b
 <div id="pw" class="tc" style="display:none"><div class="big"><i data-i="dice" data-s="44"></i></div>10 ta o'yin davomida o'yinlar tasodifiy tanlanadi.</div>
 <div class="sm tc" id="ht" style="margin-top:8px"></div></div>
 <button class="btn" id="rd"></button><button class="btn go" id="st"><i data-i="play" data-s="18"></i>O'YINNI BOSHLASH</button><div class="sm tc" id="why" style="margin-bottom:12px"></div></div>
-<div class="s" id="s-game"><div class="c tc"><div id="gh"></div><div class="big" id="sc"></div></div><div class="bd" id="bd"></div><canvas id="cv" width="320" height="440" style="display:none;width:100%;max-width:340px;margin:10px auto;border:2px solid var(--b);border-radius:14px;touch-action:none;background:#0a0f2c"></canvas><div class="tc big" id="gs"></div></div>
+<div class="s" id="s-game"><div class="gh2"><div class="pl2" id="gl"></div><div class="gm" id="gm"></div><div class="pl2 r" id="gr"></div></div><div class="bd" id="bd"></div><canvas id="cv" width="320" height="440" style="display:none;width:100%;max-width:340px;margin:10px auto;border:2px solid var(--b);border-radius:14px;touch-action:none;background:#0a0f2c"></canvas><div class="tc big" id="gs"></div></div>
 <div class="s" id="s-rate"><div class="c tc"><div class="big" id="rr"></div><div>O'yin yoqdimi?</div>
 <div class="row" style="margin-top:12px"><button class="btn g" id="up"><i data-i="up" data-s="34"></i></button><button class="btn g" id="dn"><i data-i="down" data-s="34"></i></button></div><div class="sm" id="rw"></div></div></div>
 <div class="s" id="s-dash"><h1><i data-i="trophy" data-s="30"></i>Natija</h1><div class="c tc"><div class="big" id="dw"></div><table id="dt"></table></div><button class="btn" id="bl">Lobbiga qaytish</button></div>
@@ -117,6 +128,7 @@ const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'
 const I={
 qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v1M14 20h1M17 20h4v1"/>',
 back:'<path d="m15 18-6-6 6-6"/>',
+fwd:'<path d="m9 18 6-6-6-6"/>',
 scis:'<circle cx="6" cy="6" r="3"/><path d="M8.1 8.1 12 12"/><path d="M20 4 8.1 15.9"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/>',
 rock:'<path d="M5 14l3-7 6-3 5 5 1 6-6 5-7-1z"/>',
 paper:'<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>',
@@ -309,11 +321,13 @@ function tryNext(){if(M.rh==null||M.rg==null)return;M.res.push({g:G.g,hp:G.hp,gp
  nextGame()}
 // ---- game: XO
 function play(m){G={g:m.g,b:Array(9).fill(''),turn:'X',over:0,me:(m.n+(S.host?0:1))%2?'X':'O'};
- $('#gh').innerHTML=m.tb?ic('zap',16)+" Qo'shimcha o'yin":`O'yin ${m.n}/${m.tot} · ${GAMES[m.g].n}`;
- const[h,g]=m.sc;$('#sc').textContent=`${(S.host?S.me:S.op).name} ${h} : ${g} ${(S.host?S.op:S.me).name}`;
+ const[h,g]=m.sc,me=S.me,op=S.op||{name:'?',av:'a0'};
+ $('#gl').innerHTML=avh(me.av)+`<div><div class="nm me">${esc(me.name)}</div><div class="sc">${S.host?h:g}</div></div>`;
+ $('#gr').innerHTML=avh(op.av)+`<div><div class="nm op">${esc(op.name)}</div><div class="sc">${S.host?g:h}</div></div>`;
+ $('#gm').innerHTML=`<div class="gt">${m.tb?ic('zap',13)+' ':''}${GAMES[m.g].n}</div><div id="tn"></div>`;G.nt=!['xo','c4','ship','parol'].includes(m.g);
  const pg=['pong','tank','snake'].includes(m.g);$('#cv').style.display=pg?'block':'none';$('#bd').style.display=pg?'none':'';({xo:xoInit,c4:c4Init,pong:pongInit,ship:shipInit,tank:tankInit,rps:rpsInit,snake:snakeInit,parol:parolInit})[m.g]();
  status();show('game');SFX.start()}
-const status=()=>$('#gs').textContent=G.over?'':G.st?G.st():G.g==='pong'?"Barmoqni chapga-o'ngga suring · 5 ochkogacha":G.turn===G.me?`Sizning navbatingiz (${G.me==='X'?"ko'k":'pushti'})`:'Raqib navbati...';
+const status=()=>{$('#gs').textContent=G.over?'':G.st?G.st():G.g==='pong'?"Barmoqni chapga-o'ngga suring · 5 ochkogacha":G.turn===G.me?`Sizning navbatingiz (${G.me==='X'?"ko'k":'pushti'})`:'Raqib navbati...';const t=$('#tn');if(t){const no=G.over||G.nt||G.ph==='set',m=G.turn===G.me;t.innerHTML=no?'':`<span class="ti ${m?'me':'op'}">${m?ic('back',11)+' Sizning navbat':'Raqib navbati '+ic('fwd',11)}</span>`}};
 const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 function place(i,k){G.b[i]=k;const c=$('#bd').children[i];c.textContent=k;c.className='ce '+k;G.turn=k==='X'?'O':'X';SFX[k==='X'?'x':'o']();navigator.vibrate&&navigator.vibrate(15);
  const w=L.find(l=>l.every(x=>G.b[x]===k));if(w){w.forEach(x=>$('#bd').children[x].classList.add('w'));fin(k)}else if(G.b.every(x=>x))fin(null);else status()}
@@ -359,39 +373,46 @@ function pongInit(){const g=G,cv=$('#cv'),x=cv.getContext('2d'),W=320,H=440,PW=7
  else{g.pg=m=>{if(g.over)return;if(m.s[0]+m.s[1]!==g.sc[0]+g.sc[1])SFX.o();g.ball={x:m.b[0],y:m.b[1],vx:m.b[2],vy:m.b[3],t:performance.now()};g.hxv=m.p[0];g.sc=m.s};
   g.pe=m=>end(m.w);
   const loop=n=>{if(g!==G||g.over||!conn)return;const b=g.ball,d=Math.min((n-b.t)/1000,.15);draw(b.x+b.vx*d,b.y+b.vy*d,g.hxv,W-g.mx,g.sc);requestAnimationFrame(loop)};requestAnimationFrame(loop)}}
-function shipInit(){const g=G,bd=$('#bd'),N=10,FL=[['Avianosets',5],['Linkor',4],['Kreyser',3],['Suvosti kemasi',3],['Esminets',2]],oth=k=>k==='X'?'O':'X';
- const ships=FL.map(([n,l])=>({n,l,cells:null,v:0})),occ={},shots={},got={},es=[];let sel=0,vert=0,rd=0,or=0,aim=-1,last=-1,lastO=-1,msg='',mc='';
+const SV=(ty,L,v)=>{const W=L*40;let b;
+ if(ty===0)b=`<path d="M4 20Q6 7 22 6H${W-6}Q${W-2} 6 ${W-2} 11V29Q${W-2} 34 ${W-6} 34H22Q6 33 4 20Z" fill="#aab4bf" stroke="#4d5a66" stroke-width="1.5"/><path d="M16 20H${W-14}" stroke="#fff" stroke-width="2" stroke-dasharray="8 6"/><rect x="${W*.58}" y="25" width="26" height="8" rx="2" fill="#56626e"/><path d="M${W*.2} 12l8 3-8 3zM${W*.34} 12l8 3-8 3zM${W*.46} 12l8 3-8 3z" fill="#eef3f7"/>`;
+ else if(ty===1)b=`<path d="M3 20Q8 11 26 11H${W-8}Q${W-3} 11 ${W-3} 15V25Q${W-3} 29 ${W-8} 29H26Q8 29 3 20Z" fill="#8f9eae" stroke="#4d5a66" stroke-width="1.5"/><rect x="${W*.44}" y="16" width="12" height="8" rx="2" fill="#667483"/>`+[W*.26,W*.66,W*.86].map(x=>`<circle cx="${x}" cy="20" r="7" fill="#4f5c69" stroke="#2d3640" stroke-width="1"/><rect x="${x-17}" y="18.5" width="17" height="3" fill="#2d3640"/>`).join('');
+ else if(ty===2)b=`<path d="M3 20Q8 12 24 12H${W-6}Q${W-2} 12 ${W-2} 16V24Q${W-2} 28 ${W-6} 28H24Q8 28 3 20Z" fill="#9aa7b4" stroke="#4d5a66" stroke-width="1.5"/><circle cx="32" cy="20" r="6.5" fill="#4f5c69"/><rect x="16" y="18.5" width="16" height="3" fill="#2d3640"/><rect x="56" y="14" width="20" height="12" rx="2" fill="#5d6a77"/><path d="M66 14V7" stroke="#2d3640" stroke-width="1.5"/><circle cx="92" cy="20" r="5" fill="#38434e"/><circle cx="92" cy="20" r="2" fill="#c0392b"/>`;
+ else if(ty===3)b=`<g opacity=".93"><ellipse cx="${W/2}" cy="20" rx="${W/2-4}" ry="10" fill="#2c4a66" stroke="#a9d8f0" stroke-width="1.5"/><rect x="${W/2-10}" y="9" width="20" height="9" rx="3" fill="#3c6285" stroke="#a9d8f0" stroke-width="1.2"/><path d="M${W/2+4} 9V3h7" stroke="#cfe6f2" stroke-width="2" fill="none"/><path d="M12 22H${W-12}" stroke="#4d7ba0" stroke-width="1.5" stroke-dasharray="3 4"/><circle cx="${W-13}" cy="20" r="3" fill="#a9d8f0" opacity=".7"/></g>`;
+ else b=`<path d="M3 20Q8 13 22 13H${W-5}Q${W-2} 13 ${W-2} 16V24Q${W-2} 27 ${W-5} 27H22Q8 27 3 20Z" fill="#b3bec9" stroke="#4d5a66" stroke-width="1.5"/><circle cx="26" cy="20" r="5" fill="#4f5c69"/><rect x="13" y="18.7" width="13" height="2.6" fill="#2d3640"/><rect x="40" y="15" width="14" height="10" rx="2" fill="#5d6a77"/><circle cx="62" cy="20" r="3.5" fill="#38434e"/>`;
+ return v?`<svg viewBox="0 0 40 ${W}"><g transform="translate(40 0) rotate(90)">${b}</g></svg>`:`<svg viewBox="0 0 ${W} 40">${b}</svg>`};
+function shipInit(){const g=G,bd=$('#bd'),N=10,FL=[['Samolyot tashuvchi',5],['Jang kemasi',4],['Kreyser',3],['Suv osti kemasi',3],['Qiruvchi kema',2]],oth=k=>k==='X'?'O':'X';
+ const ships=FL.map(([n,l])=>({n,l,cells:null,v:0})),occ={},shots={},got={},es=[];let sel=0,vert=0,rd=0,or=0,last=-1,lastO=-1,msg='',mc='';
  g.ph='set';g.st=()=>'';
  const free=()=>ships.findIndex(x=>!x.cells),rmv=i=>{ships[i].cells.forEach(c=>delete occ[c]);ships[i].cells=null};
  const tryPut=(i,r,c,v)=>{const l=ships[i].l;r=v?Math.min(r,N-l):r;c=v?c:Math.min(c,N-l);const cs=Array.from({length:l},(_,k)=>v?(r+k)*N+c:r*N+c+k);if(cs.some(x=>occ[x]!==undefined))return 0;ships[i].cells=cs;ships[i].v=v;cs.forEach(x=>occ[x]=i);return 1};
  const auto=()=>{ships.forEach((x,i)=>{if(x.cells)rmv(i)});ships.forEach((x,i)=>{for(;;)if(tryPut(i,Math.random()*N|0,Math.random()*N|0,Math.random()<.5?1:0))break})};
- const sea=id=>`<div class="sea" id="${id}">`+Array.from({length:N*N},(_,i)=>`<button class="zc" data-c="${i}"></button>`).join('')+'</div>';
- const ocl=c=>{let k='zc';const si=occ[c];if(si!==undefined){const x=ships[si];k+=' zs '+(x.v?'zv':'zh')+(x.cells[0]===c?' zb':'')+(x.cells[x.l-1]===c?' ze':'')}if(got[c]===1)k+=' zx';else if(got[c]===0)k+=' zm';if(c===lastO)k+=' zl';return k};
- const ek={};const ecl=c=>'zc'+(ek[c]||'')+(shots[c]===1?' zx':shots[c]===0?' zm':'')+(c===last?' zl':'')+(c===aim?' za':'');
- const chips=()=>{const o=$('#fo'),e=$('#fe');if(o)o.innerHTML=ships.map(x=>`<div class="fc ${x.cells.every(c=>got[c]===1)?'dn':''}"><span>${x.n}</span>${'<i></i>'.repeat(x.l)}</div>`).join('');
-  if(e){const cnt={},u={};es.forEach(c=>cnt[c.length]=(cnt[c.length]||0)+1);e.innerHTML=FL.map(([n,l])=>{u[l]=(u[l]||0)+1;return`<div class="fc ${u[l]<=(cnt[l]||0)?'dn':''}"><span>${n}</span>${'<i></i>'.repeat(l)}</div>`}).join('')}};
+ const sea=id=>`<div class="sea" id="${id}">`+Array.from({length:N*N},(_,i)=>`<button class="zc" data-c="${i}"></button>`).join('')+`<div class="shl" id="${id}l"></div></div>`;
+ const lay=(id,list)=>{const e=$('#'+id+'l');if(e)e.innerHTML=list.map(x=>{const c0=x.cells[0],l=x.cells.length,v=l>1&&x.cells[1]-c0===N;return`<div class="sw ${x.dead?'dd':''}" style="left:${(c0%N)*10}%;top:${(c0/N|0)*10}%;width:${(v?1:l)*10}%;height:${(v?l:1)*10}%">${SV(x.ty,l,v)}</div>`}).join('')};
+ const ocl=c=>'zc'+(got[c]===1?' zx':got[c]===0?' zm':'')+(c===lastO?' zl':''),ecl=c=>'zc'+(shots[c]===1?' zx':shots[c]===0?' zm':'')+(c===last?' zl':'');
+ const chips=()=>{const o=$('#fo'),e=$('#fe');if(o)o.innerHTML='<b>Sizning flotingiz</b>'+ships.map(x=>`<div class="fi ${x.cells.every(c=>got[c]===1)?'dn':''}">${x.n}</div>`).join('');
+  if(e){const d=new Set(es.map(q=>q.ty));e.innerHTML='<span class="sm">Dushman floti:</span>'+FL.map(([n],i)=>`<div class="fi ${d.has(i)?'dn':''}">${n}</div>`).join('')}};
  const my=()=>g.turn===g.me&&!g.wait&&!g.over;
- const banner=()=>{const b=$('#bn');if(!b)return;b.className='bn '+(my()?'my':'');b.innerHTML=`<div>${my()?'Sizning navbatingiz: nishonni tanlang':g.wait?"O'q uchmoqda...":'Raqib nishon olmoqda...'}</div>`+(msg?`<div class="${mc}">${msg}</div>`:'')+`<div class="sm">Urgan odam yana o'q uzadi, o'tkazsa navbat o'tadi</div>`;const f=$('#fr');if(f)f.disabled=!(my()&&aim>=0)};
- const paint=()=>{const ob=$('#ob'),eb=$('#eb');if(ob)for(let c=0;c<100;c++)ob.children[c].className=ocl(c);if(eb)for(let c=0;c<100;c++)eb.children[c].className=ecl(c);chips();banner()};
- const place=()=>{const f=free();if(sel>=0&&ships[sel]&&ships[sel].cells)sel=f;paint();const p=$('#fp');if(p)p.innerHTML=ships.map((x,i)=>`<button class="fc ${i===sel?'sel':''} ${x.cells?'pl':''}" data-i="${i}"><span>${x.n}</span>${'<i></i>'.repeat(x.l)}${x.cells?' ✓':''}</button>`).join('');$('#bv').textContent=vert?'Vertikal':'Gorizontal';$('#ry').disabled=f>=0||rd;$('#wt').textContent=rd?"Raqib tayyor bo'lishini kutamiz...":f>=0?"Kemani tanlang, so'ng xaritani bosing. Qo'yilgan kemani bossangiz, qaytib oladi.":"Hammasi joyida. Tayyor bosing yoki kemani bosib ko'chiring";};
+ const banner=()=>{const b=$('#bn');if(b)b.innerHTML=msg?`<span class="${mc}">${msg}</span>`:'';status()};
+ const paint=()=>{const ob=$('#ob'),eb=$('#eb');if(ob){for(let c=0;c<100;c++)ob.children[c].className=ocl(c);lay('ob',ships.map((x,i)=>x.cells&&{cells:x.cells,ty:i,dead:x.cells.every(q=>got[q]===1)}).filter(Boolean))}
+  if(eb){for(let c=0;c<100;c++)eb.children[c].className=ecl(c);lay('eb',es.map(q=>({cells:q.cells,ty:q.ty,dead:1})))}chips();banner()};
+ const place=()=>{const f=free();if(sel>=0&&ships[sel]&&ships[sel].cells)sel=f;paint();const p=$('#fp');if(p)p.innerHTML=ships.map((x,i)=>`<button class="fc ${i===sel?'sel':''} ${x.cells?'pl':''}" data-i="${i}">${x.n} · ${x.l}${x.cells?' ✓':''}</button>`).join('');$('#bv').textContent=vert?'Vertikal':'Gorizontal';$('#ry').disabled=f>=0||rd;$('#wt').textContent=rd?"Raqib tayyor bo'lishini kutamiz...":f>=0?"Kemani tanlang, so'ng xaritani bosing. Qo'yilgan kemani bossangiz, qaytib oladi.":"Hammasi joyida. Tayyor bosing yoki kemani bosib ko'chiring"};
  const buildSet=()=>{bd.className='bd sh2';bd.innerHTML=`<div class="sm tc" id="wt" style="margin-bottom:6px"></div>${sea('ob')}<div class="fl" id="fp"></div><div class="row"><button class="btn g" id="bv"></button><button class="btn g" id="ba">Avto</button><button class="btn g" id="bz">Tozalash</button></div><button class="btn" id="ry">Tayyor</button>`;
   $('#ob').onclick=e=>{const b=e.target.closest('button');if(!b||rd)return;const c=+b.dataset.c;if(occ[c]!==undefined){const i=occ[c];vert=ships[i].v;rmv(i);sel=i}else if(sel>=0&&ships[sel]&&!ships[sel].cells){if(!tryPut(sel,c/N|0,c%N,vert))toast("Bu yerga qo'yib bo'lmaydi");else sel=free()}place()};
   $('#fp').onclick=e=>{const b=e.target.closest('button');if(b&&!rd){sel=+b.dataset.i;if(ships[sel].cells)rmv(sel);place()}};
   $('#bv').onclick=()=>{vert=vert?0:1;place()};$('#ba').onclick=()=>{if(!rd){auto();sel=-1;place()}};$('#bz').onclick=()=>{if(!rd){ships.forEach((x,i)=>x.cells&&rmv(i));sel=0;place()}};
   $('#ry').onclick=()=>{if(free()>=0)return;rd=1;send({t:'move',k:'rdy'});chk();place()};place()};
- const fire=()=>{if(!(my()&&aim>=0))return;const c=aim;aim=-1;g.wait=1;send({t:'move',k:'shot',c});paint()};
- const buildPlay=()=>{bd.className='bd sh2';bd.innerHTML=`<div class="bn" id="bn"></div><div class="sm" style="margin-top:8px">Sizning flotingiz</div><div class="mini">${sea('ob')}</div><div class="fl" id="fo"></div><div class="sm">Dushman suvi</div>${sea('eb')}<div class="fl" id="fe"></div><button class="btn" id="fr" disabled>O'q uzish</button>`;
-  $('#eb').onclick=e=>{const b=e.target.closest('button');if(!b)return;const c=+b.dataset.c;if(!my()||shots[c]!==undefined)return;aim=c;paint()};$('#fr').onclick=fire;paint()};
+ const buildPlay=()=>{bd.className='bd sh2';bd.innerHTML=`<div class="hd2"><div class="mini2">${sea('ob')}</div><div class="fn" id="fo"></div></div><div class="bn2" id="bn"></div>${sea('eb')}<div class="fn2" id="fe"></div>`;
+  $('#eb').onclick=e=>{const b=e.target.closest('button');if(!b)return;const c=+b.dataset.c;if(!my()||shots[c]!==undefined)return;g.wait=1;send({t:'move',k:'shot',c});paint()};paint()};
  const chk=()=>{if(rd&&or&&g.ph==='set'){g.ph='play';buildPlay();SFX.ping()}};
  g.rm=m=>{if(m.k==='rdy'){or=1;chk();return}
   const c=m.c|0;if(c<0||c>99)return;
   if(m.k==='shot'){const si=occ[c],h=si!==undefined?1:0;got[c]=h;lastO=c;let sk=0;if(h&&ships[si].cells.every(x=>got[x]===1))sk=ships[si].cells;
-   const w=ships.every(x=>x.cells.every(q=>got[q]===1))?1:0;send({t:'move',k:'res',c,h,sk,w});
+   const w=ships.every(x=>x.cells.every(q=>got[q]===1))?1:0;send({t:'move',k:'res',c,h,sk,ty:h?si:0,w});
    SFX[sk?'sunk':h?'boom':'splash']();msg=sk?`Raqib "${ships[si].n}"ni cho'ktirdi!`:h?'Raqib kemangizni urdi!':"Raqib o'tkazdi";mc=h?'bad':'ne';
    if(w){paint();end(S.host?0:1);return}g.turn=h?oth(g.me):g.me;paint()}
-  else if(m.k==='res'){shots[c]=m.h?1:0;last=c;g.wait=0;if(Array.isArray(m.sk)){const cs=m.sk.map(Number).filter(n=>n>=0&&n<100).sort((a,b)=>a-b);es.push(cs);const v=cs.length>1&&cs[1]-cs[0]===N;cs.forEach((q,i)=>ek[q]=' zs zk '+(v?'zv':'zh')+(i===0?' zb':'')+(i===cs.length-1?' ze':''))}
-   SFX[m.sk?'sunk':m.h?'boom':'splash']();msg=m.sk?'Kema cho\'ktirildi!':m.h?'Urdi!':"O'tkazdi";mc=m.h?'ok':'ne';
-   if(m.w){paint();end(S.host?1:0);return}g.turn=m.h?g.me:oth(g.me);aim=-1;paint();if(g.turn===g.me)SFX.ping()}};
+  else if(m.k==='res'){shots[c]=m.h?1:0;last=c;g.wait=0;if(Array.isArray(m.sk))es.push({cells:m.sk.map(Number).filter(n=>n>=0&&n<100).sort((a,b)=>a-b),ty:Math.max(0,Math.min(4,m.ty|0))});
+   SFX[m.sk?'sunk':m.h?'boom':'splash']();msg=m.sk?"Kema cho'ktirildi!":m.h?'Urdi!':"O'tkazdi";mc=m.h?'ok':'ne';
+   if(m.w){paint();end(S.host?1:0);return}g.turn=m.h?g.me:oth(g.me);paint();if(g.turn===g.me)SFX.ping()}};
  buildSet()}
 function tankInit(){const g=G,cv=$('#cv'),x=cv.getContext('2d'),W=320,H=440,TS=15,host=S.host,WL=[[40,196,70,14],[210,230,70,14],[125,213,70,14]],cl=(v,a,b)=>Math.max(a,Math.min(b,v));
  g.st=()=>"Barmoq bilan tankni suring, o'q avtomatik uziladi";g.t=[W/2,H-40,W/2,40];g.hp=[3,3];g.bl=[];g.at=performance.now();let lt=0;
