@@ -263,15 +263,19 @@ const noPeer=()=>typeof Peer==='undefined'&&(toast('PeerJS yuklanmadi. Internetn
 $('#bc').onclick=()=>{if(noPeer())return;if(prof()){goFS();create()}};
 $('#bgo').onclick=()=>{if(noPeer())return;const c=$('#cd').value.trim().toUpperCase();if(prof()){if(c.length!==4)return toast('Kod 4 belgidan iborat');goFS();join(c)}};
 // ---- network
+// ===== TURN SOZLAMASI: Metered (yoki boshqa) bergan iceServers ro'yxatini shu yerga qo'ying =====
+// Misol: const TURN=[{urls:'turn:global.relay.metered.ca:80',username:'...',credential:'...'},{urls:'turn:global.relay.metered.ca:443',username:'...',credential:'...'},{urls:'turns:global.relay.metered.ca:443?transport=tcp',username:'...',credential:'...'}];
+const TURN=[{urls:'stun:stun.relay.metered.ca:80'},{urls:'turn:global.relay.metered.ca:80',username:'98aae1acfa5f9ab7676a23da',credential:'dr/pvqVUeW3y/j+L'},{urls:'turn:global.relay.metered.ca:80?transport=tcp',username:'98aae1acfa5f9ab7676a23da',credential:'dr/pvqVUeW3y/j+L'},{urls:'turn:global.relay.metered.ca:443',username:'98aae1acfa5f9ab7676a23da',credential:'dr/pvqVUeW3y/j+L'},{urls:'turns:global.relay.metered.ca:443?transport=tcp',username:'98aae1acfa5f9ab7676a23da',credential:'dr/pvqVUeW3y/j+L'}];
+const ICE=()=>TURN.length?{config:{iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun.cloudflare.com:3478'},...TURN]}}:{};
 const send=m=>conn&&conn.open&&conn.send(m);
 function create(){S.host=1;const L='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';S.code=Array.from({length:4},()=>L[Math.random()*L.length|0]).join('');
- peer=new Peer('gamecub-'+S.code);peer.on('open',()=>{show('lobby');render()});
+ peer=new Peer('gamecub-'+S.code,ICE());peer.on('open',()=>{show('lobby');render()});
  peer.on('connection',c=>{if(conn&&conn.open){c.close();return}conn=c;wire()});
  peer.on('error',e=>e.type==='unavailable-id'?create():toast('Ulanish xatosi: '+e.type))}
 const stopLd=()=>{clearTimeout(tm);$('#ld').classList.remove('on')};
 const fail=m=>{stopLd();try{conn&&conn.close()}catch(e){}try{peer&&peer.destroy()}catch(e){}conn=null;peer=null;toast(m||"Ulanib bo'lmadi. Tarmoq to'sib qo'ygan bo'lishi mumkin, qayta urinib ko'ring");show('entry')};
 function join(c){S.host=0;S.code=c;stg=1;$('#lt').textContent="1/2 · Server bilan bog'lanmoqda...";$('#ld').classList.add('on');tm=setTimeout(()=>{$('#lt').textContent=stg<2?"Server sekin javob bermoqda. Kuting yoki bekor qiling":"Raqib bilan ulanish cho'zilmoqda. Kuting yoki bekor qiling"},20000);
- peer=new Peer();
+ peer=new Peer(ICE());
  peer.on('open',()=>{stg=2;$('#lt').textContent='2/2 · Raqib bilan ulanmoqda...';conn=peer.connect('gamecub-'+c,{reliable:true});wire()});
  peer.on('error',e=>{if(e.type==='peer-unavailable')fail('Xona topilmadi. Kodni tekshiring');else toast('Ulanish xatosi: '+e.type)})}
 $('#lc').onclick=()=>fail('Bekor qilindi');
